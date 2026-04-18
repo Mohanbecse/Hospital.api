@@ -8,5 +8,11 @@ namespace Hospital.api.Models
 
         public DbSet<User> Users { get; set; }
         public DbSet<Patient> Patients { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Patient>()
+                .ToTable(tb => tb.HasTrigger("trg_Patients_Delete"));
+        }
     }
 }
